@@ -1,0 +1,58 @@
+<header class="bg-white shadow px-6 py-4 flex items-center justify-between">
+  <h1 class="text-2xl font-bold text-blue-600 flex-shrink-0">Elevate 360° - Vendor Ops Dashboard</h1>
+
+  <div class="flex-1 flex justify-center">
+    <div class="flex justify-between items-center gap-8">
+      <div class="flex items-center gap-3">
+        <span class="text-blue-600 text-2xl">
+          <i class="fas fa-filter"></i>
+        </span>
+        <span class="text-lg font-bold text-gray-800">Site Filter:</span>
+        <select
+          class="text-lg font-semibold border-2 border-blue-400 rounded-xl px-4 py-2 bg-white shadow focus:outline-none focus:ring-4 focus:ring-blue-200 transition-all duration-200"
+          [(ngModel)]="selectedSite" (change)="onSiteChange()">
+          <option value="Select">All Sites</option>
+          <option value="CGN - HYD">CGN - HYD</option>
+          <option value="CGN - BUH">CGN - BUH</option>
+          <option value="CGN - BLR">CGN - BLR</option>
+          <option value="CGN - TLV">CGN - TLV</option>
+          <option value="INF-BLR">INF-BLR</option>
+          <option value="ACN-MNL">ACN-MNL</option>
+          <option value="GBL-TOK">GBL-TOK</option>
+          <option value="TEL-SAL">TEL-SAL</option>
+          <option value="EPAM-JPN">EPAM-JPN</option>
+          <option value="INF-PHX">INF-PHX</option>
+          <option value="GOC-HYD">GOC-HYD</option>
+        </select>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <label for="premiumFilter" class="text-lg font-bold text-gray-800">Business Line:</label>
+        <select id="premiumFilter"
+          class="text-lg font-semibold border-2 border-blue-400 rounded-xl px-4 py-2 bg-white shadow focus:outline-none focus:ring-4 focus:ring-blue-200 transition-all duration-200"
+          [(ngModel)]="selectedBusinessline" (change)="onBusinessLineChange()">
+          <option value="Select">Select</option>
+          <option value="GCP Tech Premium">GCP Tech Premium</option>
+          <option value="GCP Tech Non-Premium">GCP Tech Non-Premium</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional right section like avatar or menu -->
+  <div class="flex items-center space-x-4">
+
+    <div class="notification-container">
+      <button (click)="toggleNotification()" class="bell-button">
+        <span class="icon-wrapper">
+          <i class="fa-solid fa-bell"></i>
+          <div *ngIf="!showNotification" class="notification-badge"></div>
+        </span>
+      </button>
+
+      <div *ngIf="showNotification" class="notification-box">
+        Great News! <strong>Monica just soared right to the top of TTP leaderboard!</strong>
+      </div>
+    </div>
+  </div>
+</header>
