@@ -13,15 +13,17 @@ COPY . .
 RUN npm run build -- --configuration=production --base-href=/
 
 # --- Stage 2: Production Stage (Uses a tiny Nginx image to serve static files) ---
+# --- Stage 2: Production Stage ---
 FROM nginx:alpine
 
-# 4. CRITICAL: Copy the built files from the 'BUILD' stage to Nginx's web root
-# CHANGED: Trying the slightly deeper 'browser' directory, which is common in Angular builds.
-# If this fails, we will try the original path again, but with a slight change (next step).
-COPY --from=BUILD /app/dist /usr/share/nginx/html
+# 1. Copy the custom Nginx configuration file
+# Make sure your custom file is named 'nginx.conf' and is in the project root
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# 2. Copy the built Angular files (Use the correct path you found earlier)
+COPY --from=BUILD /app/dist/<YOUR_CORRECT_PATH> /usr/share/nginx/html 
 
 # Nginx runs on port 80 by default
 EXPOSE 80
 
-# Command to run Nginx when the container starts
 CMD ["nginx", "-g", "daemon off;"]
